@@ -1,0 +1,60 @@
+{
+    "ServiceName": "Hotel-Booking-App",
+    "Otlp": {
+        "Endpoint": "http://localhost:4317"
+    },
+    "Serilog": {
+        "MinimumLevel": "Information",
+        "Using": [
+            "Serilog.Sinks.Console",
+            "Serilog.Sinks.File",
+            "Serilog.Sinks.Debug",
+            "Serilog.Sinks.Splunk"
+        ],
+        "WriteTo": [
+            {
+                "Name": "Console",
+                "Args": {
+                    "outputTemplate": "{Timestamp:HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj} {CallingContext} {Exception}{NewLine}"
+                }
+            },
+            {
+                "Name": "Debug",
+                "Args": {
+                    "outputTemplate": "{Timestamp:HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj} {CallingContext} {Exception}"
+                }
+            },
+            {
+                "Name": "File",
+                "Args": {
+                    "path": "Log.txt",
+                    "rollingInterval": "Day",
+                    "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj} {CallingContext} {Exception}{NewLine}"
+                }
+            },
+            {
+                "Name": "OpenTelemetry",
+                "Args": {
+                    "Endpoint": "http://localhost:4317",
+                    "ResourceAttributes": {
+                        "service.name": "Hotel-Booking-App",
+                        "index": 10,
+                        "flag": true
+                    },
+                    "BatchingOptions": {
+                        "BatchSizeLimit": 700,
+                        "QueueLimit": 10
+                    }
+                }
+            },
+            {
+                "Name": "EventCollector",
+                "Args": {
+                    "splunkHost": "http://localhost:8088",
+                    "uriPath": "services/collector/event",
+                    "eventCollectorToken": "49edd72d-948a-43b2-b7cf-a68b1fee00c6"
+                }
+            }
+        ]
+    }
+}

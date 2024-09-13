@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>nashtools</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Commands" Version="6.11.0" />
+    <PackageReference Include="NuGet.Configuration" Version="6.11.0" />
+    <PackageReference Include="NuGet.ProjectModel" Version="6.11.0" />
+    <PackageReference Include="NuGet.Protocol" Version="6.11.0" />
+    <PackageReference Include="Jaeger" Version="1.0.3" />
+    <PackageReference Include="Serilog.Sinks.Splunk" Version="5.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Json Files\" />
+  </ItemGroup>
+</Project>
